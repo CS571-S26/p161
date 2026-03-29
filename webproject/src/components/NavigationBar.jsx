@@ -1,13 +1,18 @@
 import React from "react";
+import { NavLink } from "react-router";
 import { LayoutDashboard, Receipt, Wallet, BarChart3 } from "lucide-react";
+import Dashboard from "../pages/Dashboard.jsx";
+import Transactions from "../pages/Transactions.jsx";
+import Budgets from "../pages/Budgets.jsx";
+import Reports from "../pages/Reports.jsx";
 
 function NavigationBar() {
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
       <div className="container">
-        <a className="navbar-brand fw-bold" href="#">
+        <NavLink className="navbar-brand fw-bold" to="/">
           Spend Smarter
-        </a>
+        </NavLink>
 
         <button
           className="navbar-toggler"
@@ -24,31 +29,52 @@ function NavigationBar() {
         <div className="collapse navbar-collapse" id="navbarNav">
           <ul className="navbar-nav me-auto mb-2 mb-lg-0">
             <li className="nav-item">
-              <a className="nav-link d-flex align-items-center gap-1" href="#">
+              <NavLink
+                to="/"
+                end
+                className={({ isActive }) =>
+                  `nav-link d-flex align-items-center gap-1 ${isActive ? "active fw-semibold" : ""}`
+                }
+              >
                 <LayoutDashboard size={18} />
                 Dashboard
-              </a>
+              </NavLink>
             </li>
 
             <li className="nav-item">
-              <a className="nav-link d-flex align-items-center gap-1" href="#">
+              <NavLink
+                to="/Transactions"
+                className={({ isActive }) =>
+                  `nav-link d-flex align-items-center gap-1 ${isActive ? "active fw-semibold" : ""}`
+                }
+              >
                 <Receipt size={18} />
                 Transactions
-              </a>
+              </NavLink>
             </li>
 
             <li className="nav-item">
-              <a className="nav-link d-flex align-items-center gap-1" href="#">
+              <NavLink
+                to="/Budgets"
+                className={({ isActive }) =>
+                  `nav-link d-flex align-items-center gap-1 ${isActive ? "active fw-semibold" : ""}`
+                }
+              >
                 <Wallet size={18} />
                 Budgets
-              </a>
+              </NavLink>
             </li>
 
             <li className="nav-item">
-              <a className="nav-link d-flex align-items-center gap-1" href="#">
+              <NavLink
+                to="/Reports"
+                className={({ isActive }) =>
+                  `nav-link d-flex align-items-center gap-1 ${isActive ? "active fw-semibold" : ""}`
+                }
+              >
                 <BarChart3 size={18} />
                 Reports
-              </a>
+              </NavLink>
             </li>
           </ul>
 

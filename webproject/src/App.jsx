@@ -1,12 +1,18 @@
 import React from "react";
+import { Routes, Route } from "react-router";
 import Dashboard from "./pages/Dashboard.jsx";
+import Transactions from "./pages/Transactions.jsx";
+import Budgets from "./pages/Budgets.jsx";
+import Reports from "./pages/Reports.jsx";
 
 function App() {
   return (
-    <>
-    
-      <Dashboard />
-    </>
+    <Routes>
+      <Route path="/" element={<Dashboard />} />
+      <Route path="/transactions" element={<Transactions />} />
+      <Route path="/budgets" element={<Budgets />} />
+      <Route path="/reports" element={<Reports />} />
+    </Routes>
   );
 }
 
