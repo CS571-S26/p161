@@ -9,6 +9,7 @@ import Layout from "./components/Layout.jsx"
 function App() {
   return (
     <Routes>
+        <h1>this</h1>
         <Route element={<Layout />}>
             <Route path="/" element={<Dashboard />} />
             <Route path="/transactions" element={<Transactions />} />
