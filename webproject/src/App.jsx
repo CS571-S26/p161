@@ -8,14 +8,15 @@ import Layout from "./components/Layout.jsx"
 
 function App() {
   return (
-    <Routes>
-        <Route element={<Layout />}>
-            <Route path="/" element={<Dashboard />} />
-            <Route path="/transactions" element={<Transactions />} />
-            <Route path="/budgets" element={<Budgets />} />
-            <Route path="/reports" element={<Reports />} />
-        </Route>
-    </Routes>
+    <h1>Hello</h1>
+    // <Routes>
+    //     <Route element={<Layout />}>
+    //         <Route path="/" element={<Dashboard />} />
+    //         <Route path="/transactions" element={<Transactions />} />
+    //         <Route path="/budgets" element={<Budgets />} />
+    //         <Route path="/reports" element={<Reports />} />
+    //     </Route>
+    // </Routes>
   );
 }
 
