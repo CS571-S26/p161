@@ -10,7 +10,7 @@ function Dashboard( {transactions} ) {
     <>
     <div className="container mt-4">
         <h1>dashboard</h1>
-        <Summary />
+        <Summary transactionSpending={transactions}/>
         <RecentTransactions recentTransactions={transactions}/>
       </div>
     </>

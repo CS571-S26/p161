@@ -1,11 +1,13 @@
 import React from "react";
 
-function Summary() {
+function Summary( {transactionSpending} ) {
     //will implement a way to get these numbers 
-  const totalSpent = 167.73;
+  const totalSpent = transactionSpending.reduce(
+    (sum, transaction) => sum + transaction.amount, 0
+  );
   const totalBudget = 1200;
   const remainingBudget = totalBudget - totalSpent;
-  const totalTransactions = 4;
+  const totalTransactions = transactionSpending.length;
 
   return (
     <div className="row g-4 mb-4">
@@ -44,7 +46,7 @@ function Summary() {
           <div className="card-body">
             <h5 className="card-title">Transactions</h5>
             <h2 className="fw-bold">{totalTransactions}</h2>
-            <p className="text-muted mb-0">Total recent transactions</p>
+            <p className="text-muted mb-0">Total transactions this month</p>
           </div>
         </div>
       </div>
