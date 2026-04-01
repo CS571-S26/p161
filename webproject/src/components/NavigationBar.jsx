@@ -1,12 +1,8 @@
 import React from "react";
 import { NavLink } from "react-router";
 import { LayoutDashboard, Receipt, Wallet, BarChart3 } from "lucide-react";
-import Dashboard from "../pages/Dashboard.jsx";
-import Transactions from "../pages/Transactions.jsx";
-import Budgets from "../pages/Budgets.jsx";
-import Reports from "../pages/Reports.jsx";
 
-function NavigationBar() {
+function NavigationBar({ onOpenForm }) {
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
       <div className="container">
@@ -78,7 +74,7 @@ function NavigationBar() {
             </li>
           </ul>
 
-          <button className="btn btn-dark">Add Expense</button>
+          <button className="btn btn-dark" onClick={onOpenForm}>Add Expense</button>
         </div>
       </div>
     </nav>

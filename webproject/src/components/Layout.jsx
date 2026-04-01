@@ -2,10 +2,10 @@ import React from "react";
 import { Outlet } from "react-router";
 import NavigationBar from "./NavigationBar.jsx";
 
-function Layout() {
+function Layout({ openForm }) {
   return (
     <>
-      <NavigationBar />
+      <NavigationBar onOpenForm={openForm}/>
       <Outlet />
     </>
   );
