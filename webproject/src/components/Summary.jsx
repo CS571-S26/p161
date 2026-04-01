@@ -1,7 +1,7 @@
 import React from "react";
 
 function Summary( {transactionSpending} ) {
-    //will implement a way to get these numbers 
+    
   const totalSpent = transactionSpending.reduce(
     (sum, transaction) => sum + transaction.amount, 0
   );
