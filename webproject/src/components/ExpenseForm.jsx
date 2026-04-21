@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import Dropdown from 'react-bootstrap/Dropdown';
+
 
 function ExpenseForm({ onAddTransaction, onClose }) {
   const [formData, setFormData] = useState({
@@ -16,8 +18,19 @@ function ExpenseForm({ onAddTransaction, onClose }) {
     });
   }
 
+  function handleCategorySelect(category) {
+    setFormData({
+      ...formData,
+      category: category
+    });
+  }
+
   function handleSubmit(event) {
     event.preventDefault();
+
+    if (!formData.category) {
+      return;
+    }
 
     const newTransaction = {
       id: Date.now(),
@@ -39,13 +52,35 @@ function ExpenseForm({ onAddTransaction, onClose }) {
           <form onSubmit={handleSubmit}>
             <div className="mb-3">
               <label className="form-label">Category</label>
-              <input
-                type="text"
-                name="category"
-                className="form-control"
-                value={formData.category}
-                onChange={handleChange}
-              />
+              <Dropdown className="w-100">
+                <Dropdown.Toggle
+                  variant="dark"
+                  id="category-dropdown"
+                  className="w-100 text-start"
+                >
+                  {formData.category || "Select Category of Spending"}
+                </Dropdown.Toggle>
+
+                <Dropdown.Menu className="w-100">
+                  <Dropdown.Item onClick={() => handleCategorySelect("Education")}>Education</Dropdown.Item>
+                  <Dropdown.Item onClick={() => handleCategorySelect("Entertainment")}>Entertainment</Dropdown.Item>
+                  <Dropdown.Item onClick={() => handleCategorySelect("Fitness")}>Fitness</Dropdown.Item>
+                  <Dropdown.Item onClick={() => handleCategorySelect("Food")}>Food</Dropdown.Item>
+                  <Dropdown.Item onClick={() => handleCategorySelect("Gas")}>Gas</Dropdown.Item>
+                  <Dropdown.Item onClick={() => handleCategorySelect("Groceries")}>Groceries</Dropdown.Item>
+                  <Dropdown.Item onClick={() => handleCategorySelect("Health")}>Health</Dropdown.Item>
+                  <Dropdown.Item onClick={() => handleCategorySelect("Insurance")}>Insurance</Dropdown.Item>
+                  <Dropdown.Item onClick={() => handleCategorySelect("Mortgage")}>Mortgage</Dropdown.Item>
+                  <Dropdown.Item onClick={() => handleCategorySelect("Other")}>Other</Dropdown.Item>
+                  <Dropdown.Item onClick={() => handleCategorySelect("Phone")}>Phone</Dropdown.Item>
+                  <Dropdown.Item onClick={() => handleCategorySelect("Rent")}>Rent</Dropdown.Item>
+                  <Dropdown.Item onClick={() => handleCategorySelect("Shopping")}>Shopping</Dropdown.Item>
+                  <Dropdown.Item onClick={() => handleCategorySelect("Subscriptions")}>Subscriptions</Dropdown.Item>
+                  <Dropdown.Item onClick={() => handleCategorySelect("Transportation")}>Transportation</Dropdown.Item>
+                  <Dropdown.Item onClick={() => handleCategorySelect("Travel")}>Travel</Dropdown.Item>
+                  <Dropdown.Item onClick={() => handleCategorySelect("Utilities")}>Utilities</Dropdown.Item>
+                </Dropdown.Menu>
+              </Dropdown>
             </div>
 
             <div className="mb-3">

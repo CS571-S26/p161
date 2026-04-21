@@ -13,6 +13,7 @@ function App() {
 
   const [transactions, setTransactions] = useState(transactionsData);
   const [monthlyBudget, setMonthlyBudget] = useState(1200);
+  const [categoryBudgets, setCategoryBudgets] = useState({});
   const [showForm, setShowForm] = useState(false);
   const [showBudgetForm, setShowBudgetForm] = useState(false);
 
@@ -35,6 +36,13 @@ function App() {
     });
 
     setShowBudgetForm(false);
+  }
+
+  function setCategoryBudget(category, amount) {
+    setCategoryBudgets((prevBudgets) => ({
+      ...prevBudgets,
+      [category]: amount
+    }));
   }
 
   function openForm(){
@@ -80,7 +88,16 @@ function App() {
             path="transactions"
             element={<Transactions transactions={transactions} />}
           />
-          <Route path="budgets" element={<Budgets />} />
+          <Route
+            path="budgets"
+            element={
+              <Budgets
+                transactions={transactions}
+                categoryBudgets={categoryBudgets}
+                onSetCategoryBudget={setCategoryBudget}
+              />
+            }
+          />
           <Route
             path="reports"
             element={<Reports transactions={transactions} monthlyBudget={monthlyBudget}/>}
