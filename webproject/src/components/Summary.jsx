@@ -1,11 +1,11 @@
 import React from "react";
 
-function Summary( {transactionSpending} ) {
+function Summary( {transactionSpending, monthlyBudget} ) {
     
   const totalSpent = transactionSpending.reduce(
     (sum, transaction) => sum + transaction.amount, 0
   );
-  const totalBudget = 1200;
+  const totalBudget = monthlyBudget;
   const remainingBudget = totalBudget - totalSpent;
   const totalTransactions = transactionSpending.length;
 

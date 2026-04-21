@@ -3,8 +3,7 @@ import CategoryPieChart from "../components/CategoryPieChart";
 import SpendingBarChart from "../components/SpendingBarChart";
 import BudgetStatus from "../components/BudgetStatus";
 
-function Reports( {transactions} ) {
-  const monthlyBudget = 1200;
+function Reports( {transactions, monthlyBudget} ) {
   const amountSpent = transactions.reduce(
     (sum, transaction) => sum + transaction.amount,
     0
