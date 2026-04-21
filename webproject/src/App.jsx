@@ -44,7 +44,7 @@ function App() {
             element={<Transactions transactions={transactions} />}
           />
           <Route path="budgets" element={<Budgets />} />
-          <Route path="reports" element={<Reports />} />
+          <Route path="reports" element={<Reports transactions={transactions}/>} />
         </Route>
       </Routes>
     </>

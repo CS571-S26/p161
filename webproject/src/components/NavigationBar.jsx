@@ -4,7 +4,7 @@ import { LayoutDashboard, Receipt, Wallet, BarChart3 } from "lucide-react";
 
 function NavigationBar({ onOpenForm }) {
   return (
-    <nav className="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
+    <nav className="navbar navbar-expand-lg navbar-dark bg-black shadow-sm">
       <div className="container">
         <NavLink className="navbar-brand fw-bold" to="/">
           Spend Smarter
