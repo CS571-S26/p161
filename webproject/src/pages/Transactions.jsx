@@ -12,7 +12,7 @@ function formatDate(date) {
   });
 }
 
-function Transactions({ transactions }) {
+function Transactions({ transactions, onEditTransaction, onDeleteTransaction }) {
   const totalSpent = transactions.reduce(
     (sum, transaction) => sum + transaction.amount,
     0
@@ -58,7 +58,7 @@ function Transactions({ transactions }) {
       {transactions.length === 0 ? (
         <div className="card shadow-sm">
           <div className="card-body">
-            <p className="text-muted mb-0">No transactions yet.</p>
+            <p className="text-body-secondary mb-0">No transactions yet.</p>
           </div>
         </div>
       ) : (
@@ -67,8 +67,8 @@ function Transactions({ transactions }) {
             <div className="col-md-3">
               <div className="card shadow-sm h-100">
                 <div className="card-body">
-                  <h5 className="card-title">Total Spent</h5>
-                  <h2 className="fw-bold text-danger">${totalSpent.toFixed(2)}</h2>
+                  <p className="card-title fw-semibold mb-2">Total Spent</p>
+                  <p className="h2 fw-bold text-danger">${totalSpent.toFixed(2)}</p>
                 </div>
               </div>
             </div>
@@ -76,8 +76,8 @@ function Transactions({ transactions }) {
             <div className="col-md-3">
               <div className="card shadow-sm h-100">
                 <div className="card-body">
-                  <h5 className="card-title">Transactions</h5>
-                  <h2 className="fw-bold">{transactions.length}</h2>
+                  <p className="card-title fw-semibold mb-2">Transactions</p>
+                  <p className="h2 fw-bold">{transactions.length}</p>
                 </div>
               </div>
             </div>
@@ -85,8 +85,8 @@ function Transactions({ transactions }) {
             <div className="col-md-3">
               <div className="card shadow-sm h-100">
                 <div className="card-body">
-                  <h5 className="card-title">Average</h5>
-                  <h2 className="fw-bold">${averageTransaction.toFixed(2)}</h2>
+                  <p className="card-title fw-semibold mb-2">Average</p>
+                  <p className="h2 fw-bold">${averageTransaction.toFixed(2)}</p>
                 </div>
               </div>
             </div>
@@ -94,8 +94,8 @@ function Transactions({ transactions }) {
             <div className="col-md-3">
               <div className="card shadow-sm h-100">
                 <div className="card-body">
-                  <h5 className="card-title">Largest</h5>
-                  <h2 className="fw-bold">${largestTransaction.amount.toFixed(2)}</h2>
+                  <p className="card-title fw-semibold mb-2">Largest</p>
+                  <p className="h2 fw-bold">${largestTransaction.amount.toFixed(2)}</p>
                 </div>
               </div>
             </div>
@@ -105,7 +105,7 @@ function Transactions({ transactions }) {
             <div className="col-md-6">
               <div className="card shadow-sm h-100">
                 <div className="card-body">
-                  <h5 className="card-title">Top Categories</h5>
+                  <h2 className="h4 card-title">Top Categories</h2>
                   <div className="d-flex flex-wrap gap-2">
                     {topCategories.map((item) => (
                       <span key={item.category} className="badge text-bg-dark fs-6">
@@ -120,7 +120,7 @@ function Transactions({ transactions }) {
             <div className="col-md-6">
               <div className="card shadow-sm h-100">
                 <div className="card-body">
-                  <h5 className="card-title">Largest Expenses</h5>
+                  <h2 className="h4 card-title">Largest Expenses</h2>
                   <ul className="list-group list-group-flush">
                     {largestExpenses.map((transaction) => (
                       <li
@@ -139,11 +139,11 @@ function Transactions({ transactions }) {
 
           <div className="card shadow-sm mb-4">
             <div className="card-body">
-              <h5 className="card-title">All Transactions</h5>
+              <h2 className="h4 card-title">All Transactions</h2>
 
               {groupedTransactions.map(([date, dateTransactions]) => (
                 <div key={date} className="mb-4">
-                  <h6 className="fw-bold border-bottom pb-2">{formatDate(date)}</h6>
+                  <h3 className="h6 fw-bold border-bottom pb-2">{formatDate(date)}</h3>
 
                   <div className="table-responsive">
                     <table className="table table-striped align-middle mb-0">
@@ -152,6 +152,7 @@ function Transactions({ transactions }) {
                           <th>Category</th>
                           <th>Amount</th>
                           <th>Description</th>
+                          <th className="text-end">Actions</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -162,6 +163,32 @@ function Transactions({ transactions }) {
                               ${transaction.amount.toFixed(2)}
                             </td>
                             <td>{transaction.description}</td>
+                            <td className="text-end">
+                              <div className="d-inline-flex gap-2">
+                                <button
+                                  type="button"
+                                  className="btn btn-sm btn-outline-dark"
+                                  onClick={() => onEditTransaction(transaction)}
+                                >
+                                  Edit
+                                </button>
+                                <button
+                                  type="button"
+                                  className="btn btn-sm btn-outline-danger"
+                                  onClick={() => {
+                                    const confirmed = window.confirm(
+                                      "Delete this transaction?"
+                                    );
+
+                                    if (confirmed) {
+                                      onDeleteTransaction(transaction.id);
+                                    }
+                                  }}
+                                >
+                                  Delete
+                                </button>
+                              </div>
+                            </td>
                           </tr>
                         ))}
                       </tbody>

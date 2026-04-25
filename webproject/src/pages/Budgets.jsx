@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import Dropdown from "react-bootstrap/Dropdown";
 
 function Budgets({ transactions, categoryBudgets, onSetCategoryBudget }) {
   const [formData, setFormData] = useState({
@@ -46,13 +45,6 @@ function Budgets({ transactions, categoryBudgets, onSetCategoryBudget }) {
     setFormData({
       ...formData,
       [name]: value
-    });
-  }
-
-  function handleCategorySelect(category) {
-    setFormData({
-      ...formData,
-      category
     });
   }
 
@@ -103,37 +95,37 @@ function Budgets({ transactions, categoryBudgets, onSetCategoryBudget }) {
 
       <div className="card shadow-sm mb-4">
         <div className="card-body">
-          <h5 className="card-title">Set Category Budget</h5>
+          <h2 className="h4 card-title">Set Category Budget</h2>
 
           <form onSubmit={handleSubmit}>
             <div className="row g-3">
               <div className="col-md-6">
-                <label className="form-label">Category</label>
-                <Dropdown className="w-100">
-                  <Dropdown.Toggle
-                    variant="dark"
-                    id="budget-category-dropdown"
-                    className="w-100 text-start"
-                  >
-                    {formData.category || "Select Budget Category"}
-                  </Dropdown.Toggle>
-
-                  <Dropdown.Menu className="w-100">
+                <label className="form-label" htmlFor="budget-category">
+                  Category
+                </label>
+                <select
+                  id="budget-category"
+                  name="category"
+                  className="form-select"
+                  value={formData.category}
+                  onChange={handleChange}
+                  required
+                >
+                  <option value="">Select Budget Category</option>
                   {categories.map((category) => (
-                    <Dropdown.Item
-                      key={category}
-                      onClick={() => handleCategorySelect(category)}
-                    >
+                    <option key={category} value={category}>
                       {category}
-                    </Dropdown.Item>
+                    </option>
                   ))}
-                  </Dropdown.Menu>
-                </Dropdown>
+                </select>
               </div>
 
               <div className="col-md-4">
-                <label className="form-label">Monthly Budget</label>
+                <label className="form-label" htmlFor="budget-amount">
+                  Monthly Budget
+                </label>
                 <input
+                  id="budget-amount"
                   type="number"
                   name="amount"
                   className="form-control"
@@ -158,7 +150,7 @@ function Budgets({ transactions, categoryBudgets, onSetCategoryBudget }) {
       {budgetRows.length === 0 ? (
         <div className="card shadow-sm">
           <div className="card-body">
-            <p className="text-muted mb-0">
+            <p className="text-body-secondary mb-0">
               Set a category budget or add transactions to start tracking category spending.
             </p>
           </div>
@@ -175,8 +167,8 @@ function Budgets({ transactions, categoryBudgets, onSetCategoryBudget }) {
                   <div className="card-body">
                     <div className="d-flex justify-content-between align-items-start mb-3">
                       <div>
-                        <h5 className="card-title mb-1">{item.category}</h5>
-                        <p className="text-muted mb-0">
+                        <h3 className="h5 card-title mb-1">{item.category}</h3>
+                        <p className="text-body-secondary mb-0">
                           ${item.spent.toFixed(2)} spent of ${item.budget.toFixed(2)}
                         </p>
                       </div>
@@ -193,13 +185,14 @@ function Budgets({ transactions, categoryBudgets, onSetCategoryBudget }) {
                     </div>
 
                     <div className="progress mb-3" style={{ height: "22px" }}>
-                      <div
-                        className="progress-bar"
-                        style={{
-                          width: `${progressWidth}%`,
-                          backgroundColor: item.budget > 0 ? status.barColor : "#6c757d"
-                        }}
-                      >
+                    <div
+                      className="progress-bar"
+                      style={{
+                        width: `${progressWidth}%`,
+                        backgroundColor: item.budget > 0 ? status.barColor : "#6c757d",
+                        color: "#212529"
+                      }}
+                    >
                         {item.budget > 0 ? `${item.percentUsed.toFixed(0)}%` : ""}
                       </div>
                     </div>

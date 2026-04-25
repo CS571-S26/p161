@@ -9,7 +9,7 @@ function RecentTransactions( {recentTransactions} ) {
       <div className="col-md-12">
         <div className="card shadow-sm h-100">
           <div className="card-body">
-            <h5 className="card-title">Recent transactions</h5>
+            <h2 className="h4 card-title">Recent Transactions</h2>
             {transactions.map((transaction, index) => (
               <div key={index} className="d-flex justify-content-between border-bottom py-2">
                 <span>{transaction.category}</span>

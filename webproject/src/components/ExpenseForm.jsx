@@ -1,27 +1,46 @@
-import React, { useState } from "react";
-import Dropdown from 'react-bootstrap/Dropdown';
+import React, { useEffect, useState } from "react";
 
+const EXPENSE_CATEGORIES = [
+  "Education",
+  "Entertainment",
+  "Fitness",
+  "Food",
+  "Gas",
+  "Groceries",
+  "Health",
+  "Insurance",
+  "Mortgage",
+  "Other",
+  "Phone",
+  "Rent",
+  "Shopping",
+  "Subscriptions",
+  "Transportation",
+  "Travel",
+  "Utilities"
+];
 
-function ExpenseForm({ onAddTransaction, onClose }) {
-  const [formData, setFormData] = useState({
-    category: "",
-    amount: "",
-    description: "",
-    date: ""
-  });
+function getInitialFormData(transaction) {
+  return {
+    category: transaction?.category || "",
+    amount: transaction?.amount?.toString() || "",
+    description: transaction?.description || "",
+    date: transaction?.date || ""
+  };
+}
+
+function ExpenseForm({ transaction, onSaveTransaction, onClose }) {
+  const [formData, setFormData] = useState(getInitialFormData(transaction));
+
+  useEffect(() => {
+    setFormData(getInitialFormData(transaction));
+  }, [transaction]);
 
   function handleChange(event) {
     const { name, value } = event.target;
     setFormData({
       ...formData,
       [name]: value
-    });
-  }
-
-  function handleCategorySelect(category) {
-    setFormData({
-      ...formData,
-      category: category
     });
   }
 
@@ -33,92 +52,96 @@ function ExpenseForm({ onAddTransaction, onClose }) {
     }
 
     const newTransaction = {
-      id: Date.now(),
+      id: transaction?.id || Date.now(),
       category: formData.category,
       amount: parseFloat(formData.amount),
       description: formData.description,
       date: formData.date
     };
 
-    onAddTransaction(newTransaction);
+    onSaveTransaction(newTransaction);
   }
 
   return (
     <div className="container mt-4">
       <div className="card shadow-sm">
         <div className="card-body">
-          <h5 className="card-title">Add New Expense</h5>
+          <p className="h4 card-title">
+            {transaction ? "Edit Transaction" : "Add New Expense"}
+          </p>
 
           <form onSubmit={handleSubmit}>
             <div className="mb-3">
-              <label className="form-label">Category</label>
-              <Dropdown className="w-100">
-                <Dropdown.Toggle
-                  variant="dark"
-                  id="category-dropdown"
-                  className="w-100 text-start"
-                >
-                  {formData.category || "Select Category of Spending"}
-                </Dropdown.Toggle>
-
-                <Dropdown.Menu className="w-100">
-                  <Dropdown.Item onClick={() => handleCategorySelect("Education")}>Education</Dropdown.Item>
-                  <Dropdown.Item onClick={() => handleCategorySelect("Entertainment")}>Entertainment</Dropdown.Item>
-                  <Dropdown.Item onClick={() => handleCategorySelect("Fitness")}>Fitness</Dropdown.Item>
-                  <Dropdown.Item onClick={() => handleCategorySelect("Food")}>Food</Dropdown.Item>
-                  <Dropdown.Item onClick={() => handleCategorySelect("Gas")}>Gas</Dropdown.Item>
-                  <Dropdown.Item onClick={() => handleCategorySelect("Groceries")}>Groceries</Dropdown.Item>
-                  <Dropdown.Item onClick={() => handleCategorySelect("Health")}>Health</Dropdown.Item>
-                  <Dropdown.Item onClick={() => handleCategorySelect("Insurance")}>Insurance</Dropdown.Item>
-                  <Dropdown.Item onClick={() => handleCategorySelect("Mortgage")}>Mortgage</Dropdown.Item>
-                  <Dropdown.Item onClick={() => handleCategorySelect("Other")}>Other</Dropdown.Item>
-                  <Dropdown.Item onClick={() => handleCategorySelect("Phone")}>Phone</Dropdown.Item>
-                  <Dropdown.Item onClick={() => handleCategorySelect("Rent")}>Rent</Dropdown.Item>
-                  <Dropdown.Item onClick={() => handleCategorySelect("Shopping")}>Shopping</Dropdown.Item>
-                  <Dropdown.Item onClick={() => handleCategorySelect("Subscriptions")}>Subscriptions</Dropdown.Item>
-                  <Dropdown.Item onClick={() => handleCategorySelect("Transportation")}>Transportation</Dropdown.Item>
-                  <Dropdown.Item onClick={() => handleCategorySelect("Travel")}>Travel</Dropdown.Item>
-                  <Dropdown.Item onClick={() => handleCategorySelect("Utilities")}>Utilities</Dropdown.Item>
-                </Dropdown.Menu>
-              </Dropdown>
+              <label className="form-label" htmlFor="expense-category">
+                Category
+              </label>
+              <select
+                id="expense-category"
+                name="category"
+                className="form-select"
+                value={formData.category}
+                onChange={handleChange}
+                required
+              >
+                <option value="">Select Category of Spending</option>
+                {EXPENSE_CATEGORIES.map((category) => (
+                  <option key={category} value={category}>
+                    {category}
+                  </option>
+                ))}
+              </select>
             </div>
 
             <div className="mb-3">
-              <label className="form-label">Amount</label>
+              <label className="form-label" htmlFor="expense-amount">
+                Amount
+              </label>
               <input
+                id="expense-amount"
                 type="number"
                 name="amount"
                 className="form-control"
                 value={formData.amount}
                 onChange={handleChange}
+                min="0"
+                step="0.01"
+                required
               />
             </div>
 
             <div className="mb-3">
-              <label className="form-label">Description</label>
+              <label className="form-label" htmlFor="expense-description">
+                Description
+              </label>
               <input
+                id="expense-description"
                 type="text"
                 name="description"
                 className="form-control"
                 value={formData.description}
                 onChange={handleChange}
+                required
               />
             </div>
 
             <div className="mb-3">
-              <label className="form-label">Date</label>
+              <label className="form-label" htmlFor="expense-date">
+                Date
+              </label>
               <input
+                id="expense-date"
                 type="date"
                 name="date"
                 className="form-control"
                 value={formData.date}
                 onChange={handleChange}
+                required
               />
             </div>
 
             <div className="d-flex gap-2">
               <button type="submit" className="btn btn-dark">
-                Add Expense
+                {transaction ? "Save Changes" : "Add Expense"}
               </button>
               <button type="button" className="btn btn-secondary" onClick={onClose}>
                 Cancel

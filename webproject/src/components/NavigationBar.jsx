@@ -2,7 +2,7 @@ import React from "react";
 import { NavLink } from "react-router";
 import { LayoutDashboard, Receipt, Wallet, BarChart3 } from "lucide-react";
 
-function NavigationBar({ onOpenForm, onOpenBudgetForm }) {
+function NavigationBar({ onOpenForm, onOpenBudgetForm, onResetData }) {
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-black shadow-sm">
       <div className="container">
@@ -75,10 +75,13 @@ function NavigationBar({ onOpenForm, onOpenBudgetForm }) {
           </ul>
 
           <div className="d-flex gap-2">
-            <button className="btn btn-outline-light" onClick={onOpenBudgetForm}>
+            <button className="btn btn-outline-danger btn-sm" onClick={onResetData}>
+              Reset All Data
+            </button>
+            <button className="btn btn-outline-light btn-sm" onClick={onOpenBudgetForm}>
               Update Budget
             </button>
-            <button className="btn btn-dark" onClick={onOpenForm}>
+            <button className="btn btn-outline-light btn-sm" onClick={onOpenForm}>
               Add Expense
             </button>
           </div>

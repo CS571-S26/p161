@@ -19,10 +19,12 @@ function SpendingBarChart({ transactions }) {
   return (
     <div className="card shadow-sm h-100">
       <div className="card-body">
-        <h5 className="card-title">Category Spending</h5>
+        <h2 className="h4 card-title">Category Spending</h2>
 
         {highestAmount === 0 ? (
-          <p className="text-muted mb-0">Add transactions to compare spending by category.</p>
+          <p className="text-body-secondary mb-0">
+            Add transactions to compare spending by category.
+          </p>
         ) : (
           <div
             className="d-flex align-items-end gap-3 overflow-auto pt-3"
@@ -65,7 +67,7 @@ function SpendingBarChart({ transactions }) {
                     ></div>
                   </div>
                   <span className="fw-semibold mt-2">{item.category}</span>
-                  <span className="text-muted small">{barHeight.toFixed(0)}%</span>
+                  <span className="text-body-secondary small">{barHeight.toFixed(0)}%</span>
                 </div>
               );
             })}

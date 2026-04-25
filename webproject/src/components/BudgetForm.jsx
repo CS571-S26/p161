@@ -27,15 +27,18 @@ function BudgetForm({ currentBudget, onUpdateBudget, onClose }) {
     <div className="container mt-4">
       <div className="card shadow-sm">
         <div className="card-body">
-          <h5 className="card-title">Update Monthly Budget</h5>
-          <p className="text-muted mb-3">
+          <p className="h4 card-title">Update Monthly Budget</p>
+          <p className="text-body-secondary mb-3">
             Current budget: ${currentBudget.toFixed(2)}
           </p>
 
           <form onSubmit={handleSubmit}>
             <div className="mb-3">
-              <label className="form-label">Budget Action</label>
+              <label className="form-label" htmlFor="budget-action">
+                Budget Action
+              </label>
               <select
+                id="budget-action"
                 name="action"
                 className="form-select"
                 value={formData.action}
@@ -48,8 +51,11 @@ function BudgetForm({ currentBudget, onUpdateBudget, onClose }) {
             </div>
 
             <div className="mb-3">
-              <label className="form-label">Amount</label>
+              <label className="form-label" htmlFor="monthly-budget-amount">
+                Amount
+              </label>
               <input
+                id="monthly-budget-amount"
                 type="number"
                 name="amount"
                 className="form-control"

@@ -14,9 +14,9 @@ function Summary( {transactionSpending, monthlyBudget} ) {
       <div className="col-md-3">
         <div className="card shadow-sm h-100">
           <div className="card-body">
-            <h5 className="card-title">Total Spent</h5>
-            <h2 className="fw-bold text-danger">${totalSpent.toFixed(2)}</h2>
-            <p className="text-muted mb-0">Money spent this month</p>
+            <p className="card-title fw-semibold mb-2">Total Spent</p>
+            <p className="h2 fw-bold text-danger">${totalSpent.toFixed(2)}</p>
+            <p className="text-body-secondary mb-0">Money spent this month</p>
           </div>
         </div>
       </div>
@@ -24,9 +24,9 @@ function Summary( {transactionSpending, monthlyBudget} ) {
       <div className="col-md-3">
         <div className="card shadow-sm h-100">
           <div className="card-body">
-            <h5 className="card-title">Monthly Budget</h5>
-            <h2 className="fw-bold text-primary">${totalBudget.toFixed(2)}</h2>
-            <p className="text-muted mb-0">Budget for this month</p>
+            <p className="card-title fw-semibold mb-2">Monthly Budget</p>
+            <p className="h2 fw-bold text-primary">${totalBudget.toFixed(2)}</p>
+            <p className="text-body-secondary mb-0">Budget for this month</p>
           </div>
         </div>
       </div>
@@ -34,9 +34,9 @@ function Summary( {transactionSpending, monthlyBudget} ) {
       <div className="col-md-3">
         <div className="card shadow-sm h-100">
           <div className="card-body">
-            <h5 className="card-title">Remaining</h5>
-            <h2 className="fw-bold text-success">${remainingBudget.toFixed(2)}</h2>
-            <p className="text-muted mb-0">Budget left</p>
+            <p className="card-title fw-semibold mb-2">Remaining</p>
+            <p className="h2 fw-bold text-success">${remainingBudget.toFixed(2)}</p>
+            <p className="text-body-secondary mb-0">Budget left</p>
           </div>
         </div>
       </div>
@@ -44,9 +44,9 @@ function Summary( {transactionSpending, monthlyBudget} ) {
       <div className="col-md-3">
         <div className="card shadow-sm h-100">
           <div className="card-body">
-            <h5 className="card-title">Transactions</h5>
-            <h2 className="fw-bold">{totalTransactions}</h2>
-            <p className="text-muted mb-0">Total transactions this month</p>
+            <p className="card-title fw-semibold mb-2">Transactions</p>
+            <p className="h2 fw-bold">{totalTransactions}</p>
+            <p className="text-body-secondary mb-0">Total transactions this month</p>
           </div>
         </div>
       </div>

@@ -36,10 +36,10 @@ function CategoryPieChart({ transactions }) {
   return (
     <div className="card shadow-sm h-100">
       <div className="card-body">
-        <h5 className="card-title">Spending by Category</h5>
+        <h2 className="h4 card-title">Spending by Category</h2>
 
         {totalSpent === 0 ? (
-          <p className="text-muted mb-0">Add transactions to see your spending breakdown.</p>
+          <p className="text-body-secondary mb-0">Add transactions to see your spending breakdown.</p>
         ) : (
           <div className="row align-items-center g-3">
             <div className="col-md-6 text-center">
@@ -104,7 +104,7 @@ function CategoryPieChart({ transactions }) {
                             "#6610f2"
                           ][index % 8]
                         }}
-                      ></span>
+                      />
                       <span>{item.category}</span>
                     </div>
                     <span className="fw-semibold">
