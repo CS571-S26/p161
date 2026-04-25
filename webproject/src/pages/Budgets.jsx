@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Dropdown from "react-bootstrap/Dropdown";
 
 function Budgets({ transactions, categoryBudgets, onSetCategoryBudget }) {
   const [formData, setFormData] = useState({
@@ -48,8 +49,19 @@ function Budgets({ transactions, categoryBudgets, onSetCategoryBudget }) {
     });
   }
 
+  function handleCategorySelect(category) {
+    setFormData({
+      ...formData,
+      category
+    });
+  }
+
   function handleSubmit(event) {
     event.preventDefault();
+
+    if (!formData.category) {
+      return;
+    }
 
     onSetCategoryBudget(formData.category, parseFloat(formData.amount));
     setFormData({
@@ -97,20 +109,26 @@ function Budgets({ transactions, categoryBudgets, onSetCategoryBudget }) {
             <div className="row g-3">
               <div className="col-md-6">
                 <label className="form-label">Category</label>
-                <input
-                  type="text"
-                  name="category"
-                  className="form-control"
-                  list="budgetCategories"
-                  value={formData.category}
-                  onChange={handleChange}
-                  required
-                />
-                <datalist id="budgetCategories">
+                <Dropdown className="w-100">
+                  <Dropdown.Toggle
+                    variant="dark"
+                    id="budget-category-dropdown"
+                    className="w-100 text-start"
+                  >
+                    {formData.category || "Select Budget Category"}
+                  </Dropdown.Toggle>
+
+                  <Dropdown.Menu className="w-100">
                   {categories.map((category) => (
-                    <option key={category} value={category} />
+                    <Dropdown.Item
+                      key={category}
+                      onClick={() => handleCategorySelect(category)}
+                    >
+                      {category}
+                    </Dropdown.Item>
                   ))}
-                </datalist>
+                  </Dropdown.Menu>
+                </Dropdown>
               </div>
 
               <div className="col-md-4">
