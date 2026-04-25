@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import EXPENSE_CATEGORIES from "../data/expenseCategories";
 
 function Budgets({ transactions, categoryBudgets, onSetCategoryBudget }) {
   const [formData, setFormData] = useState({
@@ -14,13 +15,9 @@ function Budgets({ transactions, categoryBudgets, onSetCategoryBudget }) {
 
   const categories = Array.from(
     new Set([
+      ...EXPENSE_CATEGORIES,
       ...Object.keys(spendingByCategory),
-      ...Object.keys(categoryBudgets),
-      "Food",
-      "Transportation",
-      "Entertainment",
-      "Shopping",
-      "Bills"
+      ...Object.keys(categoryBudgets)
     ])
   );
 

@@ -1,24 +1,5 @@
 import React, { useEffect, useState } from "react";
-
-const EXPENSE_CATEGORIES = [
-  "Education",
-  "Entertainment",
-  "Fitness",
-  "Food",
-  "Gas",
-  "Groceries",
-  "Health",
-  "Insurance",
-  "Mortgage",
-  "Other",
-  "Phone",
-  "Rent",
-  "Shopping",
-  "Subscriptions",
-  "Transportation",
-  "Travel",
-  "Utilities"
-];
+import EXPENSE_CATEGORIES from "../data/expenseCategories";
 
 function getInitialFormData(transaction) {
   return {
